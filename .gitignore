@@ -1,0 +1,9 @@
+# diectories
+node_modules/
+dist/
+.vscode/
+.github/
+.idea/
+
+# files
+.DS_Store

@@ -1,0 +1,16 @@
+:host {
+  all: initial;
+}
+
+.midjourney-downloader {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  translate: -50% 0;
+  background: lime;
+  z-index: 2147483647;
+  padding: 8px;
+  border: 3px solid black;
+  box-sizing: border-box;
+  border-radius: 2px;
+}

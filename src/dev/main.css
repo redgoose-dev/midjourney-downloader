@@ -1,0 +1,24 @@
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f1f2f1;
+}
+
+main {
+  background: url('https://cdn.midjourney.com/e6aa4e9d-ebab-44ea-85e9-f6c55818c499/0_2.png') no-repeat 50% 50%;
+  background-size: cover;
+  height: 100dvh;
+}
+
+header {
+  padding: 30px;
+  h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 900;
+  }
+  p {
+    margin: 8px 0 0;
+  }
+}

@@ -13,3 +13,9 @@ export const CONTEXT_MENU_ITEM_LABEL = 'Save Image'
 
 // 다운로드 서브 디렉토리 이름
 export const DOWNLOAD_DIRECTORY = 'MJ-IMAGES'
+
+// 버튼 아이디
+export const BUTTON_ID = {
+  BAGUNI: 'baguni',
+  IMAGE: 'image',
+}

@@ -1,21 +1,21 @@
 import { sleep, customEvent } from '../libs/util'
-import { HOST_ID } from '../libs/assets'
+import { HOST_ID, BUTTON_ID } from '../libs/assets'
 import Button from './Button'
 import css from './style.css'
 
 const downloadButton = {
-  baguni: {
-    label: '바구니 담기',
+  [BUTTON_ID.BAGUNI]: {
+    title: '바구니 담기',
   },
-  image: {
-    label: '이미지 다운로드',
+  [BUTTON_ID.IMAGE]: {
+    title: '이미지 다운로드',
   },
 }
 
 export default function Content(): HTMLElement
 {
   let $host = null as HTMLElement | null
-  let shadowRootNode = null as ShadowRoot | null
+  let shadowRootNode: ShadowRoot | null
 
   // set host element
   $host = document.createElement('nav')
@@ -37,8 +37,7 @@ export default function Content(): HTMLElement
   Object.entries(downloadButton).forEach(([ id, o ]) => {
     const $button = Button({
       id: id,
-      title: o.label,
-      label: o.label,
+      title: o.title,
     })
     $button.addEventListener('click', () => customEvent($host, `download-${id}`))
     $body.appendChild($button)
@@ -56,26 +55,28 @@ async function onDownloadPostState(e: CustomEvent)
   const $host = e.target as HTMLElement
   const status = e.detail?.status
   if (!$host?.shadowRoot) return
-  const $button = $host.shadowRoot.querySelector('.baguni')
+  const $button: HTMLElement = $host.shadowRoot.querySelector('.baguni')
   if (!$button) return
   if (status === 'processing')
   {
+    $button.classList.add('processing')
     $button.setAttribute('disabled', 'disabled')
   }
   switch (status)
   {
     case 'processing':
-      $button.textContent = '처리중...'
+      $button.title = '처리중...'
       return
     case 'completed':
-      $button.textContent = '완료됨'
+      $button.title = '완료됨'
       break
     default:
-      $button.textContent = '실패'
+      $button.title = '실패'
       break
   }
   await sleep(800)
   if (!$host.isConnected || !$button.isConnected) return
-  $button.textContent = downloadButton.baguni.label
+  $button.title = downloadButton[BUTTON_ID.BAGUNI].title
+  $button.classList.remove('processing')
   $button.removeAttribute('disabled')
 }

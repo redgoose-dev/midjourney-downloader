@@ -8,7 +8,9 @@
     ],
     "target": "ESNext",
     "types": [
-      "chrome"
+      "chrome",
+      "bun",
+      "node"
     ],
     "module": "Preserve",
     "moduleDetection": "force",

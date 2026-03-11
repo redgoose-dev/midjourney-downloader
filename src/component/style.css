@@ -3,14 +3,85 @@
 }
 
 .midjourney-downloader {
+  --root-height: 64px;
+  --root-radius: calc(var(--root-height) / 2);
+  --root-padding: 10px;
   position: fixed;
   left: 50%;
-  bottom: 30px;
+  bottom: 54px;
   translate: -50% 0;
-  background: lime;
   z-index: 2147483647;
-  padding: 8px;
-  border: 3px solid black;
+  height: var(--root-height);
+  display: flex;
+  justify-content: center;
+  gap: var(--root-padding);
+  background: hsla(164, 91%, 42%, 0.75);
+  backdrop-filter: blur(4px);
+  padding: var(--root-padding);
+  border: none;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: var(--root-radius);
+  box-shadow:
+    0 0 0 .5px hsla(0 0% 0% / 15%),
+    inset .5px 0 0 hsla(0 0% 100% / 50%),
+    inset -.5px 0 0 hsla(0 0% 100% / 50%),
+    0 4px 12px hsla(0 0% 0% / 12%),
+    0 8px 32px hsla(0 0% 0% / 20%);
+}
+
+button {
+  --button-shadow-1: inset 0 0 16px hsla(0 0% 0% / 20%);
+  --button-shadow-2: 0 0 0 .5px hsla(0 0% 100% / 25%);
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: calc(var(--root-height) - (var(--root-padding) * 2));
+  height: calc(var(--root-height) - (var(--root-padding) * 2));
+  background: hsla(0 0% 0% / 10%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--button-shadow-1), var(--button-shadow-2);
+  transition:
+    opacity 160ms ease-out,
+    box-shadow 160ms ease-out;
+  svg {
+    display: block;
+    margin-inline: auto;
+    stroke-width: 2;
+    color: hsla(0 0% 100% / 100%);
+    width: 20px;
+    height: 20px;
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+  &:disabled {
+    opacity: .5;
+    cursor: default;
+  }
+  &:is(.processing) {
+    svg {
+      animation: spin 2s linear infinite;
+      stroke-width: 2.5;
+      &:nth-child(1) {
+        display: none;
+      }
+      &:nth-child(2) {
+        display: block;
+      }
+    }
+  }
+  &:not(:disabled):hover {
+    --button-shadow-1: inset 0 0 16px hsla(0 0% 0% / 50%);
+  }
+  &:not(:disabled):active {
+    --button-shadow-1: inset 0 0 16px hsla(0 0% 0% / 20%);
+    --button-shadow-2: 0 0 0 2px hsl(89, 87%, 61%);
+  }
+}
+
+@keyframes spin {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
 }

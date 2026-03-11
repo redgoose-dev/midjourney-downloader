@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "bun ./src/dev/index.html",
     "prebuild": "rm -rf dist",
-    "build": "bun run --bun ./src/build.js"
+    "build": "bun run --bun ./src/build.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

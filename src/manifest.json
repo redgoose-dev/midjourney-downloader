@@ -12,9 +12,7 @@
     "128": "images/icon-128.png"
   },
   "host_permissions": [
-    "https://www.midjourney.com/*",
-    "https://*.midjourney.com/*",
-    "https://cdn.midjourney.com/*"
+    "https://*.midjourney.com/*"
   ],
   "background": {
     "service_worker": "mj-downloader-background.js"
@@ -22,7 +20,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.midjourney.com/*"
+        "https://www.midjourney.com/*",
+        "https://midjourney.com/*"
       ],
       "js": [
         "mj-downloader-content.js"

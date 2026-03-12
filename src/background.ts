@@ -12,7 +12,7 @@ let activeDownload: {
   metaDone: boolean
 } | null = null
 
-chrome.runtime.onMessage.addListener((req, sender, res) => {
+chrome.runtime.onMessage.addListener((req, sender, _res) => {
   if (req?.type === 'PREPARE_DOWNLOAD_REDIRECT')
   {
     pendingRedirect = {
@@ -126,6 +126,7 @@ function buildRedirectedFilename(file: any)
 
 async function downloadMeta(meta: Record<string, any>, filename: string)
 {
+  meta.image = filename
   const json = JSON.stringify(meta, null, 2)
   const url = `data:application/json;charset=utf-8,${encodeURIComponent(json)}`
   const metaFilename = filename.replace(/\.[^.]+$/, '.json')

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "미드저니 이미지 다운로더",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "미드저니 이미지를 다운로드하는 확장 프로그램입니다.",
   "permissions": [
     "downloads"

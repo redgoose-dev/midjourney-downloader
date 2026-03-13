@@ -16,6 +16,8 @@ export default async function downloadPost()
     setup(true)
     // 프롬프트 텍스트 가져오기
     const prompt = getPromptText()
+    // 레퍼런스 이미지 가져오기
+    const refs = getReferenceImages()
     // URL 주소 가져오기
     const url = getUrlPath()
     // 유저 데아터 가져오기
@@ -23,7 +25,7 @@ export default async function downloadPost()
     // 서비스워커에게 다운로드 리다이렉트 준비하라고 메시지 보내기
     await chrome.runtime.sendMessage({
       type: 'PREPARE_DOWNLOAD_REDIRECT',
-      meta: { url, prompt, user },
+      meta: { url, prompt, user, refs },
     })
     // 컨텍스트 메뉴열기
     const pos = download.openContextMenu(image)
@@ -88,4 +90,19 @@ function getUserData()
     url: $link.href,
     name: $link.innerText,
   }
+}
+function getReferenceImages()
+{
+  const $wrap = document.getElementById('lightboxPrompt')
+  const $opts = $wrap.querySelector('[class*="group/promptText"]').parentElement
+  const $optImages = $opts.querySelectorAll('img')
+  return [...$optImages].map(($img, idx) => {
+    const $parent = $img.parentElement
+    if ($parent.tagName?.toLowerCase() !== 'button') return false
+    if (!($parent.title && $img.alt)) return false
+    return {
+      key: $parent.title,
+      value: $img.alt,
+    }
+  }).filter(Boolean)
 }

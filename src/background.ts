@@ -27,7 +27,6 @@ chrome.downloads.onDeterminingFilename.addListener((item, suggest) => {
   if (shouldHandleMetaDownload(item))
   {
     if (activeDownload) activeDownload.metaId = item.id
-
     const filename = pendingMetaDownload?.filename
     pendingMetaDownload = null
     if (filename)

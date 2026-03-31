@@ -22,6 +22,8 @@ export default async function downloadPost()
     const url = getUrlPath()
     // 유저 데아터 가져오기
     const user = getUserData()
+    // 좋아요 버튼 누르기
+    clickLikeButton()
     // 서비스워커에게 다운로드 리다이렉트 준비하라고 메시지 보내기
     await chrome.runtime.sendMessage({
       type: 'PREPARE_DOWNLOAD_REDIRECT',
@@ -105,4 +107,11 @@ function getReferenceImages()
       value: $img.alt,
     }
   }).filter(Boolean)
+}
+
+function clickLikeButton()
+{
+  const $wrap = document.getElementById('lightboxPrompt').parentElement
+  const $button = $wrap.querySelector<HTMLButtonElement>(`button[title^='Like'], button[title^='Unlike']`)
+  $button?.click()
 }

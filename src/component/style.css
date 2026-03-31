@@ -3,12 +3,14 @@
 }
 
 .midjourney-downloader {
-  --root-height: 64px;
+  --root-height: 72px;
   --root-radius: calc(var(--root-height) / 2);
   --root-padding: 10px;
+  --icon-size: 26px;
+  --icon-stroke: 1.5;
   position: fixed;
   left: 50%;
-  bottom: 54px;
+  bottom: 100px;
   translate: -50% 0;
   z-index: 2147483647;
   height: var(--root-height);
@@ -48,10 +50,10 @@ button {
   svg {
     display: block;
     margin-inline: auto;
-    stroke-width: 2;
+    stroke-width: var(--icon-stroke, 2);
     color: hsla(0 0% 100% / 100%);
-    width: 20px;
-    height: 20px;
+    width: var(--icon-size, 20px);
+    height: var(--icon-size, 20px);
     &:nth-child(2) {
       display: none;
     }
